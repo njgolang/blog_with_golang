@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
+</head>
+<body>
+
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">BLOG</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">主页</a></li>
+				<li><a href="#">文章</a></li>
+				<li><a href="about">关于</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+        <div id="box" ng-controller=getArticlesCtrl>
+            <table class="table">
+                <tr ng-repeat="x in articles">
+                    <td>{{ x.Id }}</td>
+                    <td>{{ x.Title }}</td>
+                    <td>{{ x.PostDate }}</td>
+                </tr>
+            </table>
+        </div>
+	</div>
+
+	<script src="static/js/jquery-2.2.0.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/js/angular.min.js"></script>
+	<script src="static/js/articleCtrl.js"></script>
+
+</body>
+</html>
