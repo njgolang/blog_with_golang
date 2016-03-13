@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"site/models"
-	"time"
+	// "time"
 )
 
 type ArticleController struct {
@@ -20,9 +20,9 @@ func (this *ArticleController) GetMoreArticle() {
 	o := orm.NewOrm()
 
 	// 插入测试数据
-	t := time.Now().Unix()
-	article := models.Article{Title: "linux", PostDate: t}
-	o.Insert(&article)
+	// t := time.Now().Unix()
+	// article := models.Article{Title: "linux", PostDate: t}
+	// o.Insert(&article)
 
 	sql := "select * from article"
 	o.Raw(sql).QueryRows(&articles)

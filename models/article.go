@@ -8,6 +8,8 @@ type Article struct {
 	Id       int64
 	Title    string
 	PostDate int64
+	Author   string
+	Path     string
 }
 
 func init() {

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="mainApp">
+<html ng-app="myApp">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
 </head>
 <body>
-
 
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
@@ -21,21 +20,21 @@
 		</div>
 	</nav>
 	<div class="container">
-        <div id="box" ng-controller=getArticlesCtrl>
-            <table class="table">
-                <tr ng-repeat="x in articles">
-                    <td>{{ x.Id }}</td>
-                    <td>{{ x.Title }}</td>
-                    <td>{{ x.PostDate }}</td>
-                </tr>
-            </table>
+        <div id="box" ng-controller="topArticlesCtrl">
+        	<div ng-repeat="item in articles">
+        		<p><a ng-click='go(item.Path)'>{{ item.Title }}</a></p>
+        		
+        		<p>{{ item.PostDate | date: 'medium'}}</p>
+
+        	</div>
+
         </div>
 	</div>
 
 	<script src="static/js/jquery-2.2.0.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
 	<script src="static/js/angular.min.js"></script>
-	<script src="static/js/articleCtrl.js"></script>
-
+	<script src="static/js/topArticlesCtrl.js"></script>
+	
 </body>
 </html>
