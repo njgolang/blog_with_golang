@@ -13,9 +13,25 @@ import (
 	"strings"
 )
 
+func initRepo() {
+
+	localRepoDir := LocalGitParentDir + "/" + RepoName
+	if !IsFileOrFoldExist(localRepoDir) {
+		cmdString := "cd " +  LocalGitParentDir + "; git clone " + RemoteGitAddr
+		runcmd(cmdString)
+	}
+
+	if !IsFileOrFoldExist(RepoName) {
+		cmdString := "ln -s " + localRepoDir + " " + RepoName
+		runcmd(cmdString)
+	}
+}
+
 func init() {
+	initRepo()
+	
 	// beego.SetStaticPath("/", "views")
-	beego.SetStaticPath("/articles", "articles")
+	beego.SetStaticPath("/articles", RepoName)
 	/**
 	 * 数据库设置
 	 * 数据库名: test
@@ -48,6 +64,8 @@ func main() {
 func syncToDb() {
 	ticker := time.NewTicker(time.Minute * 1)
 	for _ = range ticker.C {
+		cmdString := "git pull"
+		runcmd(cmdString)
 		articlesPath := "articles"
 		mdList := getFilelist(articlesPath)
 		for _, value := range mdList {

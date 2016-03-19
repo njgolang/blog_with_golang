@@ -2,7 +2,8 @@
 <html ng-app="myApp">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
 </head>
 <body>
 
@@ -20,15 +21,19 @@
 		</div>
 	</nav>
 	<div class="container">
-        <div id="box" ng-controller="topArticlesCtrl">
-        	<div ng-repeat="item in articles">
-        		<p><a ng-click='go(item.Path)'>{{ item.Title }}</a></p>
+		<section class="row">
+			<div class="col-sm-12">
+				<div id="box" ng-controller="topArticlesCtrl">
+        			<div ng-repeat="item in articles">
+        				<div class="postTitle"><a ng-click='go(item.Path)'>{{ item.Title }}</a></div>
         		
-        		<p>{{ item.PostDate | date: 'medium'}}</p>
+        				<div class="postDesc">{{ item.PostDate | date: 'medium'}}</div>
 
-        	</div>
+        			</div>
 
-        </div>
+        		</div>
+			</div>
+		</section>
 	</div>
 
 	<script src="static/js/jquery-2.2.0.min.js"></script>
