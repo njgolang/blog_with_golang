@@ -1,5 +1,0 @@
-package common
-
-import (
-	"os"
-)

@@ -8,7 +8,6 @@ import (
 	_ "site/routers"
 	"site/models"
 	"time"
-	// "fmt"
 	"os"
 	"strings"
 )
@@ -29,8 +28,7 @@ func initRepo() {
 
 func init() {
 	initRepo()
-	
-	// beego.SetStaticPath("/", "views")
+
 	beego.SetStaticPath("/articles", RepoName)
 	/**
 	 * 数据库设置
@@ -66,7 +64,7 @@ func syncToDb() {
 	for _ = range ticker.C {
 		cmdString := "git pull"
 		runcmd(cmdString)
-		articlesPath := "articles"
+		articlesPath := "articles/"
 		mdList := getFilelist(articlesPath)
 		for _, value := range mdList {
 			insertArticle(value)
@@ -93,8 +91,6 @@ func insertArticle(filepath string) {
  
 	o := orm.NewOrm()
 	
-
-
 	var articles []models.Article
 	sql := "select * from article where Path='" + filepath + "'"
 	o.Raw(sql).QueryRows(&articles)
