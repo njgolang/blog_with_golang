@@ -10,10 +10,11 @@ import (
 	"time"
 	"os"
 	"strings"
+	"strconv"
+	"fmt"
 )
 
 func initRepo() {
-
 	localRepoDir := LocalGitParentDir + "/" + RepoName
 	if !IsFileOrFoldExist(localRepoDir) {
 		cmdString := "cd " +  LocalGitParentDir + "; git clone " + RemoteGitAddr
@@ -60,7 +61,7 @@ func main() {
  * sync md file to database
  */ 
 func syncToDb() {
-	ticker := time.NewTicker(time.Minute * 1)
+	ticker := time.NewTicker(time.Minute * updateFreq)
 	for _ = range ticker.C {
 		cmdString := "git pull"
 		runcmd(cmdString)
@@ -69,7 +70,6 @@ func syncToDb() {
 		for _, value := range mdList {
 			insertArticle(value)
 		}
-		
 	}
 }
 
@@ -82,11 +82,19 @@ func insertArticle(filepath string) {
 	if err != nil {
 		panic(err)
 	}
-	modTime := fileInfo.ModTime()
+	paths := strings.Split(filepath, "/")
+	pathsLen := len(paths)
+
+	aritcleDate := strings.Split(paths[pathsLen-2], "-")
+	year, _ := strconv.Atoi(aritcleDate[0])
+	month, _ := strconv.Atoi(aritcleDate[1])
+	day, _ := strconv.Atoi(aritcleDate[2])
+	pDate := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)
+	fmt.Println(pDate.Month())
 	filename := fileInfo.Name()
 	titles := strings.Split(filename, ".")
 	sz := len(titles)
-	article := models.Article{Title: titles[sz-2], PostDate: modTime.Unix(), Path: filepath}
+	article := models.Article{Title: titles[sz-2], PostDate: pDate.Unix(), Path: filepath}
 	
  
 	o := orm.NewOrm()
@@ -105,9 +113,4 @@ func insertArticle(filepath string) {
 	if !isExist {
 		o.Insert(&article)
 	}
-
-	// fmt.Println(articles)
-	//插入测试数据
-	// article := models.Article{Title: "linux", PostDate: modTime.Unix(), Author: "my", Path: filepath}
-	// o.Insert(&article)
 }

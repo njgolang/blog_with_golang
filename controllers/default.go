@@ -14,6 +14,17 @@ func (c *MainController) Get() {
 	c.TplNames = "index.html"
 }
 
+
+type PostsController struct {
+	beego.Controller
+}
+
+func (c *PostsController) Get() {
+	beego.TemplateLeft = "<<<"
+	beego.TemplateRight = ">>>"
+	c.TplNames = "pages.html"
+}
+
 type AboutController struct {
 	beego.Controller
 }
