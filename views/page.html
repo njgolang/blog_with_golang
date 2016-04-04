@@ -8,6 +8,19 @@
 	<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
 </head>
 <body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">BLOG</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/">主页</a></li>
+				<li><a href="/pages">文章</a></li>
+				<li><a href="/about">关于</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div id="container">
 		<div ng-controller="pageCtrl">
 			<markdown></markdown>
@@ -26,5 +39,4 @@
 <script >hljs.initHighlightingOnLoad();</script>
 
 </body>
-
 </html>

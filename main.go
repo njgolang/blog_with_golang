@@ -11,7 +11,7 @@ import (
 	"os"
 	"strings"
 	"strconv"
-	"fmt"
+	// "fmt"
 )
 
 func initRepo() {
@@ -90,7 +90,6 @@ func insertArticle(filepath string) {
 	month, _ := strconv.Atoi(aritcleDate[1])
 	day, _ := strconv.Atoi(aritcleDate[2])
 	pDate := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)
-	fmt.Println(pDate.Month())
 	filename := fileInfo.Name()
 	titles := strings.Split(filename, ".")
 	sz := len(titles)
